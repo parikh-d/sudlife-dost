@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SUD Life - Dost</title>
+    <style>
+      :root {
+        --primary-blue: #08508f;
+        --secondary-blue: #2474b9;
+        --primary-red: #ed412d;
+        --secondary-red: #cc2311;
+        --text-dark: #333;
+        --text-light: #666;
+        --background-light: #f8f9fa;
+        --white: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Tablet and Desktop Responsive */
+      @media (min-width: 768px) {
+        .container {
+          max-width: 720px;
+          padding: 0 30px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .container {
+          max-width: 1200px;
+          padding: 0 40px;
+        }
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue) 0%,
+          var(--secondary-blue) 100%
+        );
+        color: var(--white);
+        padding: 20px 0 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(237, 28, 36, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 4s ease-in-out infinite;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .tagline {
+        font-size: 16px;
+        opacity: 0.9;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+        animation: slideUp 0.8s ease-out;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        opacity: 0.9;
+        position: relative;
+        z-index: 2;
+        animation: slideUp 0.8s ease-out 0.2s both;
+        margin-bottom: 30px;
+      }
+
+      .hero-image {
+        position: relative;
+        z-index: 2;
+        animation: slideUp 0.8s ease-out 0.4s both;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: auto;
+        max-width: 480px;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+      }
+
+      .hero-image img:hover {
+        transform: scale(1.02);
+      }
+
+      /* Desktop Header Styles */
+      @media (min-width: 768px) {
+        .header {
+          padding: 20px 0 20px;
+        }
+
+        .logo {
+          font-size: 36px;
+        }
+
+        .tagline {
+          font-size: 18px;
+        }
+
+        .hero-title {
+          font-size: 48px;
+          margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+          font-size: 22px;
+          max-width: 600px;
+          margin: 0 auto 40px auto;
+        }
+
+        .hero-image img {
+          max-width: 600px;
+          border-radius: 20px;
+        }
+      }
+
+      /* Features */
+      .features {
+        padding: 60px 0;
+        background: var(--background-light);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      /* Tablet Features Layout */
+      @media (min-width: 768px) {
+        .features {
+          padding: 80px 0;
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
+        }
+      }
+
+      /* Desktop Features Layout */
+      @media (min-width: 1024px) {
+        .features {
+          padding: 100px 0;
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 40px;
+          max-width: 900px;
+          margin: 0 auto;
+        }
+      }
+
+      .feature-card {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 30px 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid var(--primary-red);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeInUp 0.6s ease-out;
+        height: fit-content;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .feature-card:hover .feature-icon-img {
+        transform: scale(1.1);
+      }
+
+      .feature-card:nth-child(even) {
+        border-left-color: var(--primary-blue);
+      }
+
+      /* Desktop Feature Cards */
+      @media (min-width: 768px) {
+        .feature-card {
+          padding: 40px 35px;
+        }
+
+        .feature-icon {
+          width: 70px;
+          height: 70px;
+          padding: 15px;
+        }
+
+        .feature-icon-img {
+          width: 100%;
+          height: 100%;
+        }
+
+        .feature-title {
+          font-size: 22px;
+        }
+
+        .feature-description {
+          font-size: 16px;
+        }
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue),
+          var(--secondary-blue)
+        );
+        color: var(--white);
+        padding: 12px;
+      }
+
+      .feature-icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:nth-child(even) .feature-icon {
+        background: linear-gradient(
+          135deg,
+          var(--primary-red),
+          var(--secondary-red)
+        );
+      }
+
+      .feature-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--primary-blue);
+      }
+
+      .feature-description {
+        color: var(--text-light);
+        line-height: 1.5;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary-red) 0%,
+          var(--secondary-red) 100%
+        );
+        color: var(--white);
+        padding: 60px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 56, 116, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 6s ease-in-out infinite reverse;
+      }
+
+      .cta-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .cta-subtitle {
+        font-size: 16px;
+        opacity: 0.9;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .download-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .download-btn {
+        background: var(--white);
+        color: var(--primary-red);
+        padding: 15px 20px;
+        border: none;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .download-icon {
+        height: 50px;
+        width: auto;
+        transition: transform 0.3s ease;
+      }
+
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .download-btn:hover .download-icon {
+        transform: scale(1.05);
+      }
+
+      .download-btn:active {
+        transform: translateY(0);
+      }
+
+      /* Desktop CTA Styles */
+      @media (min-width: 768px) {
+        .cta-section {
+          padding: 80px 0;
+        }
+
+        .cta-title {
+          font-size: 36px;
+          margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+          font-size: 20px;
+          margin-bottom: 40px;
+          max-width: 500px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 40px;
+        }
+
+        .download-buttons {
+          flex-direction: row;
+          gap: 20px;
+          justify-content: center;
+        }
+
+        .download-btn {
+          padding: 20px 25px;
+        }
+
+        .download-icon {
+          height: 60px;
+        }
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--primary-blue);
+        color: var(--white);
+        text-align: center;
+        padding: 40px 0;
+      }
+
+      .footer-text {
+        opacity: 0.8;
+        font-size: 14px;
+      }
+
+      /* Desktop Footer Styles */
+      @media (min-width: 768px) {
+        .footer {
+          padding: 50px 0;
+        }
+
+        .footer-text {
+          font-size: 16px;
+        }
+      }
+
+      /* Animations */
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.8;
+        }
+      }
+
+      /* Scroll animations */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Mobile optimizations */
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 15px;
+        }
+
+        .hero-title {
+          font-size: 28px;
+        }
+
+        .feature-card {
+          padding: 25px 20px;
+        }
+
+        .hero-image img {
+          max-width: 320px;
+          border-radius: 12px;
+        }
+      }
+
+      /* Large Desktop Styles */
+      @media (min-width: 1200px) {
+        .hero-title {
+          font-size: 56px;
+        }
+
+        .hero-subtitle {
+          font-size: 24px;
+        }
+
+        .features-grid {
+          max-width: 1000px;
+          gap: 50px;
+        }
+
+        .cta-title {
+          font-size: 42px;
+        }
+
+        .cta-subtitle {
+          font-size: 22px;
+        }
+
+        .hero-image img {
+          max-width: 720px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <h1 class="hero-title">SUD Life Dost</h1>
+        <p class="hero-subtitle">
+          Master sales with Business Illustrations, Product Ready-Reckoners and
+          a lot more
+        </p>
+        <div class="hero-image">
+          <img src="images/title.png" alt="SUD Life Dost App Preview" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">
+              <img
+                src="images/bi.png"
+                alt="Business Illustrations"
+                class="feature-icon-img"
+              />
+            </div>
+            <h3 class="feature-title">Business Illustrations</h3>
+            <p class="feature-description">
+              Create personalized BIs for customers with plan explanation and
+              illustration within seconds.
+            </p>
+          </div>
+
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">
+              <img
+                src="images/cobrand.png"
+                alt="Co-Branded Collateral"
+                class="feature-icon-img"
+              />
+            </div>
+            <h3 class="feature-title">Co-Branded Collateral</h3>
+            <p class="feature-description">
+              Create, personalize and share posters & presenations with your
+              contact details.
+            </p>
+          </div>
+
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">
+              <img
+                src="images/product.png"
+                alt="Ready Reckoners"
+                class="feature-icon-img"
+              />
+            </div>
+            <h3 class="feature-title">Ready Reckoners</h3>
+            <p class="feature-description">
+              Product details, sales pitch and FAQs for all products based on
+              customer persona.
+            </p>
+          </div>
+
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">
+              <img
+                src="images/comm.png"
+                alt="Communication Module"
+                class="feature-icon-img"
+              />
+            </div>
+            <h3 class="feature-title">Communication Module</h3>
+            <p class="feature-description">
+              Share product collaterals with customers directly via multiple
+              modes – Whatsapp, SMS, Email.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-title">Ready to Transform Your Sales?</h2>
+        <p class="cta-subtitle">
+          Download the app and start your journey to excellence
+        </p>
+        <div class="download-buttons">
+          <a
+            href="#"
+            class="download-btn android"
+            onclick="downloadApp('android')"
+          >
+            <img
+              src="images/play_11378801.png"
+              alt="Get it on Google Play"
+              class="download-icon"
+            />
+          </a>
+          <a href="#" class="download-btn ios" onclick="downloadApp('ios')">
+            <img
+              src="images/apple_2504884.png"
+              alt="Download on the App Store"
+              class="download-icon"
+            />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-text">
+          © 2025 SUD Life Insurance. Empowering your growth.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Scroll animation
+      function animateOnScroll() {
+        const elements = document.querySelectorAll(".animate-on-scroll");
+
+        elements.forEach((element) => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+
+          if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add("animated");
+          }
+        });
+      }
+
+      // Download button functionality
+      function downloadApp(platform) {
+        // Add a subtle animation
+        const btn = event.target.closest(".download-btn");
+        btn.style.transform = "scale(0.95)";
+
+        setTimeout(() => {
+          btn.style.transform = "scale(1)";
+
+          // You can update these URLs later
+          if (platform === "android") {
+            window.open(
+              "https://play.google.com/store/apps/details?id=com.sudlife.dost",
+              "_blank"
+            );
+          } else if (platform === "ios") {
+            window.open(
+              "https://apps.apple.com/in/app/dost-by-sud-life/id6503878904",
+              "_blank"
+            );
+          }
+        }, 150);
+      }
+
+      // Add click ripple effect to feature cards
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        card.addEventListener("click", function (e) {
+          const ripple = document.createElement("div");
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: radial-gradient(circle, rgba(0,56,116,0.1) 0%, transparent 70%);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+
+          this.style.position = "relative";
+          this.style.overflow = "hidden";
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Add ripple animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Initialize scroll animations
+      window.addEventListener("scroll", animateOnScroll);
+      window.addEventListener("load", animateOnScroll);
+
+      // Add smooth scrolling
+      document.documentElement.style.scrollBehavior = "smooth";
+
+      // Stagger animation delays for feature cards
+      document.querySelectorAll(".feature-card").forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+    </script>
+  </body>
+</html>
